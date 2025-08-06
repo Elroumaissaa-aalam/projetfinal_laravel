@@ -1,0 +1,270 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    body {
+        font-family: 'Inter', 'Figtree', sans-serif;
+    }
+}
+
+@layer components {
+    .gradient-bg {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+    
+    .medical-gradient {
+        background: linear-gradient(135deg, #4f46e5 0%, #06b6d4 50%, #10b981 100%);
+    }
+    
+    .auth-card {
+        backdrop-filter: blur(10px);
+        background: #fffffff2;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    .dark .auth-card {
+        background: rgba(17, 24, 39, 0.95);
+        border: 1px solid rgba(75, 85, 99, 0.2);
+    }
+    
+    .btn-primary {
+        background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+        border: none;
+        transition: all 0.3s ease;
+    }
+    
+    .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(79, 70, 229, 0.3);
+    }
+    
+    .input-modern {
+        border: 2px solid #e5e7eb;
+        border-radius: 12px;
+        transition: all 0.3s ease;
+        background: #ffffffcc;
+    }
+    
+    .input-modern:focus {
+        border-color: #4f46e5;
+        box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        transform: translateY(-1px);
+    }
+    
+    .dark .input-modern {
+        background: rgba(17, 24, 39, 0.8);
+        border-color: #374151;
+        color: #f9fafb;
+    }
+    
+    .dark .input-modern:focus {
+        border-color: #7c3aed;
+        box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
+    }
+    
+
+    
+    .stats-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 40px #4f46e526;
+    }
+    
+    .floating-elements::before {
+        content: '';
+        position: absolute;
+        top: 10%;
+        left: 10%;
+        width: 100px;
+        height: 100px;
+        background: linear-gradient(45deg, rgba(79, 70, 229, 0.1), rgba(124, 58, 237, 0.1));
+        border-radius: 50%;
+        animation: float 6s ease-in-out infinite;
+    }
+    
+    .floating-elements::after {
+        content: '';
+        position: absolute;
+        bottom: 10%;
+        right: 10%;
+        width: 150px;
+        height: 150px;
+        background: linear-gradient(45deg, rgba(6, 182, 212, 0.1), rgba(16, 185, 129, 0.1));
+        border-radius: 50%;
+        animation: float 8s ease-in-out infinite reverse;
+    }
+    
+    @keyframes float {
+        0%, 100% { transform: translateY(0px) rotate(0deg); }
+        50% { transform: translateY(-20px) rotate(180deg); }
+    }
+    
+    .medical-icon {
+        background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+
+    .hero-background {
+        background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #e0e7ff 100%);
+    }
+    
+    .pulse-animation {
+        animation: pulse-custom 2s infinite;
+    }
+    
+    @keyframes pulse-custom {
+        0%, 100% {
+            opacity: 1;
+            transform: scale(1);
+        }
+        50% {
+            opacity: 0.8;
+            transform: scale(1.05);
+        }
+    }
+    
+    .fade-in-up {
+        animation: fadeInUp 0.8s ease-out;
+    }
+    
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    .slide-in-left {
+        animation: slideInLeft 0.8s ease-out;
+    }
+    
+    @keyframes slideInLeft {
+        from {
+            opacity: 0;
+            transform: translateX(-30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+    
+    .scale-on-hover {
+        transition: transform 0.3s ease;
+    }
+    
+    .scale-on-hover:hover {
+        transform: scale(1.05);
+    }
+    
+ 
+    .medical-blue {
+        background: linear-gradient(135deg, #0ea5e9 0%, #3b82f6 100%);
+    }
+    
+    .medical-light-blue {
+        background: linear-gradient(135deg, #7dd3fc 0%, #93c5fd 100%);
+    }
+    
+    .medical-navy {
+        background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);
+    }
+    
+   
+    .section-padding {
+        padding: 5rem 0;
+    }
+    
+    
+    .card-hover {
+        transition: all 0.3s ease;
+    }
+    
+    .card-hover:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1);
+    }
+    
+
+    .btn-animate {
+        position: relative;
+        overflow: hidden;
+        transition: all 0.3s ease;
+    }
+    
+    .btn-animate:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
+    }
+    
+    .btn-animate::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        transition: left 0.5s;
+    }
+    
+    .btn-animate:hover::before {
+        left: 100%;
+    }
+    
+
+    .gradient-text {
+        background: linear-gradient(135deg, #0ea5e9 0%, #3b82f6 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+    
+  
+    .loading-shimmer {
+        background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+        background-size: 200% 100%;
+        animation: shimmer 1.5s infinite;
+    }
+    
+    @keyframes shimmer {
+        0% {
+            background-position: -200% 0;
+        }
+        100% {
+            background-position: 200% 0;
+        }
+    }
+}
+
+
+
+@media (max-width: 768px) {
+    .hero-text {
+        font-size: 2.5rem;
+        line-height: 1.2;
+    }
+    
+    .section-padding {
+        padding: 3rem 0;
+    }
+}
+
+
+
+@media (prefers-color-scheme: dark) {
+    .hero-background {
+        background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+    }
+}
