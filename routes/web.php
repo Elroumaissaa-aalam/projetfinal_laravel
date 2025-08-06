@@ -20,8 +20,6 @@ Route::get('/about', function () {
 Route::get('/pharmacy', [PharmacyController::class, 'index'])->name('pharmacy');
 
 Route::post('/appointments/book', [AppointmentController::class, 'book'])->name('appointments.book');
-Route::get('/appointments/payment/{appointment}', [AppointmentController::class, 'payment'])->name('appointments.payment');
-Route::post('/appointments/payment/process', [AppointmentController::class, 'processPayment'])->name('appointments.payment.process');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
