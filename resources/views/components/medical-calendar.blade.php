@@ -186,11 +186,122 @@ class MedicalCalendar {
     }
 
     handleDateClick(info) {
-        // Handle when user clicks on a date
-        this.openEventModal('create', {
-            start: info.date,
-            end: new Date(info.date.getTime() + 60 * 60 * 1000) // 1 hour later
+        // Show available time slots for the selected date
+        this.showTimeSlots(info.date);
+    }
+
+    async showTimeSlots(selectedDate) {
+        try {
+            // Generate time slots for the selected date
+            const timeSlots = this.generateTimeSlots();
+            
+            // Create modal for time slot selection
+            this.createTimeSlotModal(selectedDate, timeSlots);
+        } catch (error) {
+            console.error('Error showing time slots:', error);
+            this.showNotification('Failed to load time slots', 'error');
+        }
+    }
+
+    generateTimeSlots() {
+        const slots = [];
+        const startHour = 9; // 9 AM
+        const endHour = 17; // 5 PM
+        
+        for (let hour = startHour; hour < endHour; hour++) {
+            slots.push(`${hour.toString().padStart(2, '0')}:00`);
+            slots.push(`${hour.toString().padStart(2, '0')}:30`);
+        }
+        
+        return slots;
+    }
+
+    createTimeSlotModal(selectedDate, timeSlots) {
+        // Remove existing modal if any
+        const existingModal = document.getElementById('timeSlotModal');
+        if (existingModal) {
+            existingModal.remove();
+        }
+
+        const modal = document.createElement('div');
+        modal.id = 'timeSlotModal';
+        modal.className = 'fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4';
+        
+        const dateStr = selectedDate.toLocaleDateString();
+        
+        modal.innerHTML = `
+            <div class="bg-white rounded-lg max-w-md w-full p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-lg font-semibold">Select Time for ${dateStr}</h3>
+                    <button onclick="this.closest('#timeSlotModal').remove()" class="text-gray-500 hover:text-gray-700">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+                <div class="grid grid-cols-3 gap-2 mb-4">
+                    ${timeSlots.map(slot => `
+                        <button class="time-slot-btn p-2 text-sm border border-gray-300 rounded hover:bg-blue-50 hover:border-blue-500 transition-colors" 
+                                data-time="${slot}">
+                            ${slot}
+                        </button>
+                    `).join('')}
+                </div>
+                <div class="flex justify-end space-x-3">
+                    <button onclick="this.closest('#timeSlotModal').remove()" class="px-4 py-2 text-gray-600 hover:text-gray-800">
+                        Cancel
+                    </button>
+                    <button id="confirmTimeSlot" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700" disabled>
+                        Confirm
+                    </button>
+                </div>
+            </div>
+        `;
+
+        document.body.appendChild(modal);
+
+        // Add event listeners for time slot selection
+        const timeSlotBtns = modal.querySelectorAll('.time-slot-btn');
+        const confirmBtn = modal.querySelector('#confirmTimeSlot');
+        let selectedTime = null;
+
+        timeSlotBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove previous selection
+                timeSlotBtns.forEach(b => b.classList.remove('bg-blue-500', 'text-white'));
+                
+                // Select current button
+                btn.classList.add('bg-blue-500', 'text-white');
+                selectedTime = btn.dataset.time;
+                confirmBtn.disabled = false;
+            });
         });
+
+        confirmBtn.addEventListener('click', () => {
+            if (selectedTime) {
+                this.createAppointment(selectedDate, selectedTime);
+                modal.remove();
+            }
+        });
+    }
+
+    async createAppointment(selectedDate, selectedTime) {
+        // Create appointment with selected date and time
+        const appointmentData = {
+            start: `${selectedDate.toISOString().split('T')[0]}T${selectedTime}`,
+            end: this.calculateEndTime(selectedDate, selectedTime),
+            title: 'New Appointment',
+            duration_minutes: 30
+        };
+
+        await this.createEvent(appointmentData);
+    }
+
+    calculateEndTime(date, time) {
+        const [hours, minutes] = time.split(':');
+        const endDate = new Date(date);
+        endDate.setHours(parseInt(hours), parseInt(minutes) + 30);
+        return endDate.toISOString();
     }
 
     openEventModal(mode, eventData) {
