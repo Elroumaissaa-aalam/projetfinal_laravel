@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -56,21 +55,11 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        // Redirect based on role
-        switch ($user->role) {
-            case 'patient':
-                return redirect()->route('patient.dashboard');
-            case 'doctor':
-                return redirect()->route('doctor.dashboard');
-            case 'nurse':
-                return redirect()->route('nurse.dashboard');
-            case 'admin':
-                return redirect()->route('admin.dashboard');
-            case 'pharmacist':
-                return redirect()->route('pharmacist.dashboard');
-            default:
-                return redirect()->route('dashboard');
-        }
+        // Redirect new users to patient dashboard
+        return redirect('/mride');
     }
 }
+
+
+
 

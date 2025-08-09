@@ -8,9 +8,10 @@ class DoctorDashboardController extends Controller
 {
     public function index()
     {
-        return view('doctor.dashboard');
+        return view('patient.DC_dashboard');
     }
 }
+
 
 
 

@@ -39,21 +39,8 @@ class Appointment extends Model
         return $this->belongsTo(User::class, 'doctor_id');
     }
 
-   
-    public function scopeUpcoming($query)
-    {
-        return $query->where('appointment_date', '>', now());
-    }
+
 
     
-    public function scopeToday($query)
-    {
-        return $query->whereDate('appointment_date', today());
-    }
 
-
-    public function scopeStatus($query, $status)
-    {
-        return $query->where('status', $status);
-    }
 }

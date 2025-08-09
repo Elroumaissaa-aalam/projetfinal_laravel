@@ -8,8 +8,11 @@
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=inter:400,500,600,700&display=swap" rel="stylesheet" />
 </head>
+
+
 <body class="font-sans antialiased">
 
+    
     <header class="bg-white shadow-sm border-b border-gray-100 sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
@@ -55,8 +58,8 @@
             <div id="mobile-menu" class="hidden md:hidden pb-4">
                 <div class="space-y-2">
                     <a href="#home" class="block text-gray-900 hover:text-sky-600 font-medium py-2">Home</a>
+                    <a href="{{ route('about') }}" class="block text-gray-700 hover:text-sky-600 font-medium py-2">About Us</a>
                     <a href="#services" class="block text-gray-700 hover:text-sky-600 font-medium py-2">Services</a>
-                    <a href="{{ route('pharmacy') }}" class="block text-gray-700 hover:text-sky-600 font-medium py-2">Pharmacy</a>
                     <a href="#contact" class="block text-gray-700 hover:text-sky-600 font-medium py-2">Contact</a>
                     <div class="flex flex-col space-y-2 pt-4 border-t border-gray-200">
                         <a href="{{ route('login') }}" class="text-gray-700 hover:text-sky-600 font-medium py-2">Log In</a>
@@ -495,3 +498,4 @@
     </script>
 </body>
 </html>
+

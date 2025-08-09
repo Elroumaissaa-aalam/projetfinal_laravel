@@ -1,29 +1,27 @@
-<nav x-data="{ open: false }" class="bg-white/90 dark:bg-gray-800/90 border-b border-gray-100 dark:border-gray-700 shadow-lg sticky top-0 z-50 backdrop-blur">
+<nav x-data="{ open: false }" class="bg-white/90 dark:bg-sky-800 border-b border-gray-100 dark:border-gray-700 shadow-lg sticky top-0 z-50 backdrop-blur">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16 items-center">
             <div class="flex items-center space-x-3">
-                <img src="/images/clinivie-logo.png" alt="Clinivie Logo" class="w-10 h-10 rounded-none shadow-none" style="object-fit:contain;">
+               
                 <div class="flex flex-col">
-                    <a href="{{ route('dashboard') }}" class="text-2xl font-bold bg-gradient-to-r from-sky-600 to-blue-600 bg-clip-text text-transparent">CLINIVIE</a>
+                    <a href="{{ route('dashboard') }}" class="text-2xl font-bold bg-gradient-to-r from-black to-blue-950 bg-clip-text text-transparent">CLINIVIE</a>
                     <div class="text-sm text-gray-600">
-                        @if(auth()->user()->role === 'doctor')
-                            Dr. {{ auth()->user()->name }}
-                        @elseif(auth()->user()->role === 'nurse')
-                            Nurse {{ auth()->user()->name }}
-                        @elseif(auth()->user()->role === 'patient')
-                            {{ auth()->user()->name }}
-                        @else
-                            {{ auth()->user()->name }}
-                        @endif
+                     
                     </div>
                 </div>
             </div>
             <div class="hidden md:flex space-x-8">
-                <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" class="text-gray-700 hover:text-sky-600 font-medium transition-colors">
+                @php
+                    $dashboardRoute = match(auth()->user()->role) {
+                        'admin' => 'admin.dashboard',
+                        'doctor' => 'doctor.dashboard', 
+                        'nurse' => 'nurse.dashboard',
+                        default => 'patient.dashboard'
+                    };
+                @endphp
+                
+                <x-nav-link :href="route($dashboardRoute)" :active="request()->routeIs($dashboardRoute)" class="text-black hover:text-blue-600 font-medium transition-colors">
                     {{ __('Dashboard') }}
-                </x-nav-link>
-                <x-nav-link :href="route('profile.edit')" :active="request()->routeIs('profile.edit')" class="text-gray-700 hover:text-sky-600 font-medium transition-colors">
-                    {{ __('Profile') }}
                 </x-nav-link>
             </div>
             <div class="flex items-center space-x-4">
@@ -86,3 +84,4 @@
         </div>
     </div>
 </nav>
+

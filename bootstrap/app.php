@@ -10,9 +10,27 @@ return Application::configure(basePath: dirname(__DIR__))
         commands: __DIR__.'/../routes/console.php',
         health: '/up',
     )
-    ->withMiddleware(function (Middleware $middleware): void {
-        //
+    ->withMiddleware(function (Middleware $middleware) {
+        // Register middleware alias
+        $middleware->alias([
+            'role' => \App\Http\Middleware\RoleMiddleware::class,
+        ]);
+        
+        // Ensure cache directories exist
+        $cachePaths = [
+            storage_path('framework/cache'),
+            storage_path('framework/views'),
+            storage_path('framework/sessions'),
+        ];
+        
+        foreach ($cachePaths as $path) {
+            if (!is_dir($path)) {
+                mkdir($path, 0755, true);
+            }
+        }
     })
-    ->withExceptions(function (Exceptions $exceptions): void {
+    ->withExceptions(function (Exceptions $exceptions) {
         //
     })->create();
+
+
