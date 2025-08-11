@@ -56,7 +56,7 @@
     </form>
 
     <!-- Demo Accounts -->
-    <div class="mt-8 p-4 bg-sky-50 rounded-lg border border-sky-200">
+    {{-- <div class="mt-8 p-4 bg-sky-50 rounded-lg border border-sky-200">
         <h3 class="text-sm font-semibold text-gray-900 mb-3">Demo Accounts:</h3>
         <div class="grid grid-cols-2 gap-3 text-xs">
             <div class="bg-white p-2 rounded border">
@@ -77,5 +77,5 @@
             </div>
         </div>
         <p class="text-xs text-gray-500 mt-2">Password: password</p>
-    </div>
+    </div> --}}
 </x-guest-layout>

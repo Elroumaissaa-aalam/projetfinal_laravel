@@ -197,28 +197,7 @@
     </form>
 
     <!-- Demo Accounts -->
-    <div class="mt-8 p-4 bg-sky-50 rounded-lg border border-sky-200">
-        <h3 class="text-sm font-semibold text-gray-900 mb-3">Demo Accounts:</h3>
-        <div class="grid grid-cols-2 gap-3 text-xs">
-            <div class="bg-white p-2 rounded border">
-                <div class="font-medium text-sky-700">Patient</div>
-                <div class="text-gray-600">patient@clinic.com</div>
-            </div>
-            <div class="bg-white p-2 rounded border">
-                <div class="font-medium text-blue-700">Doctor</div>
-                <div class="text-gray-600">doctor@clinic.com</div>
-            </div>
-            <div class="bg-white p-2 rounded border">
-                <div class="font-medium text-cyan-700">Nurse</div>
-                <div class="text-gray-600">nurse@clinic.com</div>
-            </div>
-            <div class="bg-white p-2 rounded border">
-                <div class="font-medium text-indigo-700">Admin</div>
-                <div class="text-gray-600">admin@clinic.com</div>
-            </div>
-        </div>
-        <p class="text-xs text-gray-500 mt-2">Password: password</p>
-    </div>
+    
  <?php echo $__env->renderComponent(); ?>
 <?php endif; ?>
 <?php if (isset($__attributesOriginal69dc84650370d1d4dc1b42d016d7226b)): ?>
