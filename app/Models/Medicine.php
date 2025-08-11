@@ -46,9 +46,9 @@ class Medicine extends Model
     /**
      * Get prescriptions that use this medicine.
      */
-    public function prescriptions(): HasMany
+    public function prescriptions()
     {
-        return $this->hasMany(Prescription::class, 'medication', 'name');
+      
     }
 
     /**
