@@ -12,7 +12,7 @@
 
 <div id="calendar"></div>
 
-<!-- Booking Modal -->
+
 <div id="bookingModal" class="modal" style="display: none;">
     <div class="modal-content">
         <div class="modal-header">
@@ -78,18 +78,18 @@
 document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
     
-    // Load appointments from localStorage
+
     function loadAppointments() {
         const stored = localStorage.getItem('medical_appointments');
         return stored ? JSON.parse(stored) : [];
     }
     
-    // Save appointments to localStorage
+ 
     function saveAppointments(appointments) {
         localStorage.setItem('medical_appointments', JSON.stringify(appointments));
     }
     
-    // Generate time slots
+   
     const timeSlots = [
         '09:00', '09:30', '10:00', '10:30', '11:00', '11:30',
         '12:00', '12:30', '13:00', '13:30', '14:00', '14:30',
@@ -123,7 +123,7 @@ document.addEventListener('DOMContentLoaded', function() {
             successCallback(events);
         },
         dateClick: function(info) {
-            // Only allow booking for future dates
+         
             const today = new Date();
             today.setHours(0, 0, 0, 0);
             const clickedDate = new Date(info.date);
@@ -148,7 +148,7 @@ Status: ${props.status}
 
     calendar.render();
     
-    // Modal functions
+ 
     function openBookingModal(date) {
         const dateString = date.toISOString().split('T')[0];
         document.getElementById('appointmentDate').value = dateString;
@@ -197,7 +197,7 @@ Status: ${props.status}
         return 'apt_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
     }
     
-    // Event listeners
+ 
     document.querySelector('.close').addEventListener('click', closeModal);
     document.getElementById('cancelBtn').addEventListener('click', closeModal);
     
@@ -231,7 +231,7 @@ Status: ${props.status}
         alert('Appointment booked successfully!');
     });
     
-    // Close modal when clicking outside
+   
     window.addEventListener('click', function(e) {
         const modal = document.getElementById('bookingModal');
         if (e.target === modal) {

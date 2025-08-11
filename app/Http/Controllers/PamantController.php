@@ -22,7 +22,7 @@ class PamantController extends Controller
                             "name" => "Medical Consultation",
                             "description" => "Professional medical consultation service"
                         ],
-                        'unit_amount'  => 5000, // $50.00
+                        'unit_amount'  => 5000, 
                     ],
                     'quantity'   => 1,
                 ],
@@ -74,8 +74,7 @@ class PamantController extends Controller
 
     private function handleSuccessfulPayment($session)
     {
-        // Update appointment status, send confirmation email, etc.
-        // Implementation depends on your business logic
+    
     }
 }
 
