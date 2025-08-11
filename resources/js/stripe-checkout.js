@@ -4,7 +4,8 @@ class StripeCheckout {
         this.elements = null;
         this.paymentElement = null;
         this.options = {
-            publishableKey: options.publishableKey,
+            // Use publishable key from meta tag (set in Blade template)
+            publishableKey: document.querySelector('meta[name="stripe-key"]')?.content,
             appearance: {
                 theme: 'stripe',
                 variables: {
@@ -23,6 +24,9 @@ class StripeCheckout {
     }
 
     async init() {
+        if (!this.options.publishableKey) {
+            throw new Error('Stripe publishable key not found');
+        }
         this.stripe = Stripe(this.options.publishableKey);
         this.bindEvents();
     }

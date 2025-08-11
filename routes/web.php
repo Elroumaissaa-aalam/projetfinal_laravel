@@ -5,6 +5,8 @@ use App\Http\Controllers\PatientDashboardController;
 use App\Http\Controllers\DoctorDashboardController;
 use App\Http\Controllers\NurseDashboardController;
 use App\Http\Controllers\AdminDashboardController;
+use App\Http\Controllers\PamantController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', fn() => view('welcome'))->name('welcome');
@@ -34,7 +36,7 @@ Route::middleware('auth')->group(function () {
 
 
     Route::get('/dashboard', function () {
-        $user = auth()->user();
+        $user = Auth::user();
         return match (strtolower($user->role)) {
             'admin' => redirect()->route('admin.dashboard'),
             'doctor' => redirect()->route('doctor.dashboard'),
@@ -43,6 +45,8 @@ Route::middleware('auth')->group(function () {
             default => abort(403, 'Access Denied'),
         };
     })->name('dashboard');
+
+    Route::get('/stripe', [PamantController::class, 'checkout'])->name('stripe.payement');
 
 
 
@@ -63,4 +67,8 @@ Route::middleware('auth')->group(function () {
     })->middleware('role:admin')->name('admin.redirect');
 });
 
+
+
+
 require __DIR__ . '/auth.php';
+
