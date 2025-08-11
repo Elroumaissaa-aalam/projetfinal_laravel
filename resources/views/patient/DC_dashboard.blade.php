@@ -74,6 +74,7 @@
 
     <script src="https://js.stripe.com/v3/"></script>
     <script>
+        
         function openPaymentModal() {
             document.getElementById('paymentModal').classList.remove('hidden');
            
